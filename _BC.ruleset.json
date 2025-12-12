@@ -1,0 +1,22 @@
+{
+    "name": "BC",
+    "description": "Rules",
+    "generalAction": "Hidden",
+    "rules": [
+        {
+            "id": "AA0214",
+            "action": "Hidden",
+            "justification": "Not need solve"
+        },
+        {
+            "id": "AS0084",
+            "action": "Hidden",
+            "justification": "Not need solve"
+        },
+        {
+            "id": "AA0005",
+            "action": "Hidden",
+            "justification": "Not need solve"
+        }
+    ]
+}
