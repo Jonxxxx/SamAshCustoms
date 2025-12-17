@@ -5,10 +5,9 @@
             "name": "Microsoft cloud sandbox",
             "request": "launch",
             "type": "al",
-            "environmentType": "Sandbox",
-            //JX Dev
-            "environmentName": "DevLocLatam",
-            "tenant": "67b3258e-324b-43ec-a4d5-5e63000db68e",
+            "environmentType": "Sandbox",            
+            "environmentName": "SamAsh_Test",
+            "tenant": "3367119d-fa87-480a-b280-637fa4cd1b1c",
             "startupObjectId": 22,
             "startupObjectType": "Page",
             "breakOnError": true,

@@ -10,10 +10,17 @@ reportextension 55100 SAPurchOrder extends "Standard Purchase - Order"
             { }
             column(SALocationCode; "Purchase Line"."Location Code")
             { }
-            column(SABuyFrmVendName_PurchHeader_Lbl; "Purchase Header".FieldCaption("Buy-from Vendor Name"))
+            column(SABuyFrmVendName_PurchHeader_Lbl; VendorDescLbl)
             { }
-            column(SALocation_PurchLine_Lbl; "Purchase Line".FieldCaption("Location Code"))
+            column(SALocation_PurchLine_Lbl; LocationLbl)
+            { }
+            column(SABuyFrmVendNo_PurchHeader_Lbl; VendorNoLbl)
             { }
         }
     }
+
+    var
+        VendorNoLbl: Label 'Vendor No.';
+        VendorDescLbl: Label 'Vendor Description';
+        LocationLbl: Label 'Location';
 }

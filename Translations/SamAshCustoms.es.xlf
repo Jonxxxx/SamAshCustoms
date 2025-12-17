@@ -1,20 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="en-US" original="SamAshCustoms">
+  <file datatype="xml" source-language="en-US" target-language="es" original="SamAshCustoms">
     <body>
       <group id="body">
         <trans-unit id="ReportExtension 1347276500 - NamedType 3629245473" size-unit="char" translate="yes" xml:space="preserve" al-object-target="ReportExtension 1347276500">
           <source>Location</source>
+          <target>Almacen</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">ReportExtension SAPurchOrder - NamedType LocationLbl</note>
         </trans-unit>
         <trans-unit id="ReportExtension 1347276500 - NamedType 4187682489" size-unit="char" translate="yes" xml:space="preserve" al-object-target="ReportExtension 1347276500">
           <source>Vendor Description</source>
+          <target>Descripción Proveedor</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">ReportExtension SAPurchOrder - NamedType VendorDescLbl</note>
         </trans-unit>
         <trans-unit id="ReportExtension 1347276500 - NamedType 2193582545" size-unit="char" translate="yes" xml:space="preserve" al-object-target="ReportExtension 1347276500">
           <source>Vendor No.</source>
+          <target>No. Proveedor</target>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">ReportExtension SAPurchOrder - NamedType VendorNoLbl</note>
         </trans-unit>
