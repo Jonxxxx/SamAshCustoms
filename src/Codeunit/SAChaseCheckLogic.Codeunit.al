@@ -19,8 +19,6 @@ codeunit 55100 SAChaseCheckLogic
         LineCounter: Integer;
 
     Begin
-        FileName := BuildChaseCheckFileName(GenJnlLine."Journal Template Name", GenJnlLine."Journal Batch Name");
-
         LineCounter := 0;
 
         //Validaciones. Abstraer
@@ -53,7 +51,6 @@ codeunit 55100 SAChaseCheckLogic
                         Error('Remit Address Pay is not configured for Vendor %1.', GenJnlLine."Account No.");
 
                     if (HasVendorLedgerEntry(GenJnlLine, VendorLedgerEntries)) then begin
-
                         OutStr.WriteText(PaymentHeaderRecord(GenJnlLine, GLSetup."SA Chase Check No. Series"));
                         OutStr.WriteText();
                         LineCounter := LineCounter + 1;
@@ -90,6 +87,8 @@ codeunit 55100 SAChaseCheckLogic
         OutStr.WriteText(FileTrailerRecord(LineCounter));
         OutStr.WriteText();
 
+        FileName := BuildChaseCheckFileName(GenJnlLine."Journal Template Name", GenJnlLine."Journal Batch Name");
+
         TempBlob.CreateInStream(InStr);
         DownloadFromStream(InStr, 'Download', '', 'CSV Files (*.csv)|*.csv', FileName);
     End;
@@ -112,7 +111,7 @@ codeunit 55100 SAChaseCheckLogic
         // Saca caracteres inválidos para nombre de archivo en Windows
         Value := DelChr(Value, '=', '<>:"/\|?*');
         // Opcional: espacios a underscore
-        Value := ConvertStr(Value, ' ', '_');
+        Value := ConvertStr(Value, SpaceLbl, '_');
         exit(Value);
     end;
 
@@ -120,7 +119,10 @@ codeunit 55100 SAChaseCheckLogic
     var
         Line: Text;
     begin
-        Line := 'FILHDR' + LineSepLbl + 'PWS' + LineSepLbl + NextDay() + LineSepLbl + LineSepLbl;
+        Line := 'FILHDR' + LineSepLbl +
+                'PWS' + LineSepLbl +
+                LineSepLbl +            //Not required
+                NextDay() + LineSepLbl;
         exit(Line);
     end;
 
@@ -140,8 +142,8 @@ codeunit 55100 SAChaseCheckLogic
             'SAMASH' + LineSepLbl +
             NextDay() + LineSepLbl +
             FormatAmount(GenJnlLine.Amount) + LineSepLbl +
-            BankAccount."Bank Account No." + LineSepLbl +
-            NoSeriesManagement.GetNextNo(ChaseCheckNoSeries) + LineSepLbl +
+            KeepOnlyDigits(BankAccount."Bank Account No.") + LineSepLbl +
+            KeepOnlyDigits(NoSeriesManagement.GetNextNo(ChaseCheckNoSeries)) + LineSepLbl +
             FormatText(GenJnlLine.Comment, 100);
         exit(Line);
     end;
@@ -203,8 +205,6 @@ codeunit 55100 SAChaseCheckLogic
             FormatText(VendorLedgerEntries."Document No.", 30) + LineSepLbl +
             FormatText(VendorLedgerEntries.Description, 30) + LineSepLbl +
             FormatDate(VendorLedgerEntries."Posting Date") + LineSepLbl +
-            FormatDate(VendorLedgerEntries."Posting Date") + LineSepLbl +
-            FormatDate(VendorLedgerEntries."Posting Date") + LineSepLbl +
             FormatAmount(Abs(VendorLedgerEntries."Amount to Apply") - Abs(VendorLedgerEntries."Original Pmt. Disc. Possible")) + LineSepLbl +
             FormatAmount(Abs(VendorLedgerEntries."Amount to Apply")) + LineSepLbl +
             FormatAmount(Abs(VendorLedgerEntries."Original Pmt. Disc. Possible")) + LineSepLbl;
@@ -231,7 +231,7 @@ codeunit 55100 SAChaseCheckLogic
         Line: Text;
     begin
 
-        Line := 'FILTRL' + LineSepLbl + Format(LineCounter + 2); //Header + LineCounter +Trailer
+        Line := 'FILTRL' + LineSepLbl + PadStr(Format(LineCounter + 2), 6, SpaceLbl); //Header + LineCounter +Trailer
         exit(Line);
     end;
 
@@ -247,7 +247,7 @@ codeunit 55100 SAChaseCheckLogic
     var
         DateText: Text;
     begin
-        DateText := Format(Date, 0, '<Month,2>/<Day,2>/<Year,2>');
+        DateText := Format(Date, 0, '<Month,2>/<Day,2>/<Year4,4>');
         exit(DateText)
     end;
 
@@ -276,7 +276,7 @@ codeunit 55100 SAChaseCheckLogic
                 10,  // LF
                 13,  // CR
                 124: // '|'
-                    OutText += ' ';
+                    OutText += SpaceLbl;
                 else
                     OutText += Ch;
             end;
@@ -292,6 +292,24 @@ codeunit 55100 SAChaseCheckLogic
         exit(OutText);
     end;
 
+    local procedure KeepOnlyDigits(Source: Text): Text
+    var
+        i: Integer;
+        ResultTxt: Text;
+        Ch: Char;
+    begin
+        ResultTxt := '';
+
+        for i := 1 to StrLen(Source) do begin
+            Ch := Source[i];
+            if (Ch >= '0') and (Ch <= '9') then
+                ResultTxt += CopyStr(Source, i, 1);
+        end;
+
+        exit(ResultTxt);
+    end;
+
     var
         LineSepLbl: Label ',';
+        SpaceLbl: Label ' ';
 }

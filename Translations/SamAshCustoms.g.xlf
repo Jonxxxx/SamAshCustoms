@@ -8,6 +8,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit SAChaseCheckLogic - NamedType LineSepLbl</note>
         </trans-unit>
+        <trans-unit id="Codeunit 1263178450 - NamedType 3613378682" size-unit="char" translate="yes" xml:space="preserve">
+          <source> </source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SAChaseCheckLogic - NamedType SpaceLbl</note>
+        </trans-unit>
         <trans-unit id="PageExtension 3648713018 - Control 1654090712 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4050813720">
           <source>Specify the No. Series to be used for Chase Checks. This No. Series will generate the check numbers when creating the Chase Check file, since physical checks are not printed using the standard Print Check process.</source>
           <note from="Developer" annotates="general" priority="2"></note>
