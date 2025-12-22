@@ -3,6 +3,51 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="SamAshCustoms">
     <body>
       <group id="body">
+        <trans-unit id="Codeunit 1263178450 - NamedType 2979631654" size-unit="char" translate="yes" xml:space="preserve">
+          <source>,</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit SAChaseCheckLogic - NamedType LineSepLbl</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3648713018 - Control 1654090712 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 4050813720">
+          <source>Specify the No. Series to be used for Chase Checks. This No. Series will generate the check numbers when creating the Chase Check file, since physical checks are not printed using the standard Print Check process.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension SAGLSetup - Control SA Chase Check No. Series - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 521734534 - Action 2166024259 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3196174509">
+          <source>Generate and download Chase Check File.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension SAPaymentJournals - Action SAPrintChaseCheck - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 521734534 - Action 2166024259 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3196174509">
+          <source>Print Chase Check</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension SAPaymentJournals - Action SAPrintChaseCheck - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 521734534 - Control 4037104167 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3196174509">
+          <source>Specify whether the Chase Check file has been generated for this journal line. This field is automatically set to Yes when you run Print Chase Check and the line is included in the generated file.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension SAPaymentJournals - Control SAChaseCheckApplied - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 812251209 - Control 2062987813 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2805771090">
+          <source>Specify whether this payment method requires generating the Chase Check file before posting the payment journal.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension SAPaymentMethod - Control SAChaseCheckFormat - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 3773782683 - Field 4037104167 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1806786327">
+          <source>Chase Check Applied (Yes/No)</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension SAGenJournalLine - Field SAChaseCheckApplied - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 3648713018 - Field 1654090712 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 4050813720">
+          <source>Chase Check No. Series</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension SAGLSetup - Field SA Chase Check No. Series - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 812251209 - Field 2062987813 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 3566004263">
+          <source>Chase Check Format</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension SAPaymentMethod - Field SAChaseCheckFormat - Property Caption</note>
+        </trans-unit>
         <trans-unit id="ReportExtension 1347276500 - NamedType 3629245473" size-unit="char" translate="yes" xml:space="preserve" al-object-target="ReportExtension 1347276500">
           <source>Location</source>
           <note from="Developer" annotates="general" priority="2"></note>
