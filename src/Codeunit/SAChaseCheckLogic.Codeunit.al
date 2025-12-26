@@ -78,8 +78,8 @@ codeunit 55100 SAChaseCheckLogic
                                 LineCounter := LineCounter + 1;
                             until VendorLedgerEntries.Next() = 0;
 
-                        //GenJnlLine.SAChaseCheckApplied := true;
-                        //GenJnlLine.Modify();
+                        GenJnlLine.SAChaseCheckApplied := true;
+                        GenJnlLine.Modify();
                     end;
                 end;
             until GenJnlLine.Next() = 0;
