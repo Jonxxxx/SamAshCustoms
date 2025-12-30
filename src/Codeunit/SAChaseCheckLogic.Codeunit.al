@@ -55,7 +55,7 @@ codeunit 55100 SAChaseCheckLogic
                         OutStr.WriteText();
                         LineCounter := LineCounter + 1;
 
-                        OutStr.WriteText(PayeeNameRecord(Vendor));
+                        OutStr.WriteText(PayeeNameRecord(RemitAddress));
                         OutStr.WriteText();
                         LineCounter := LineCounter + 1;
 
@@ -148,15 +148,15 @@ codeunit 55100 SAChaseCheckLogic
         exit(Line);
     end;
 
-    local procedure PayeeNameRecord(Vendor: Record Vendor): Text
+    local procedure PayeeNameRecord(RemitAddress: Record "Remit Address"): Text
     var
         Line: Text;
     begin
         Line :=
             'PAYENM' + LineSepLbl +
-            FormatText(Vendor.Name, 35) + LineSepLbl +
-            FormatText(CopyStr(Vendor.Name, 36, 35), 35) + LineSepLbl +
-            Vendor."No.";
+            FormatText(RemitAddress.Name, 35) + LineSepLbl +
+            FormatText(CopyStr(RemitAddress.Name, 36, 35), 35) + LineSepLbl +
+            RemitAddress."Vendor No.";
         exit(Line);
     end;
 
@@ -204,10 +204,10 @@ codeunit 55100 SAChaseCheckLogic
             'RMTDTL' + LineSepLbl +
             FormatText(VendorLedgerEntries."Document No.", 30) + LineSepLbl +
             FormatText(VendorLedgerEntries.Description, 30) + LineSepLbl +
-            FormatDate(VendorLedgerEntries."Posting Date") + LineSepLbl +
+            FormatDate(VendorLedgerEntries."Posting Date", '/') + LineSepLbl +
             FormatAmount(Abs(VendorLedgerEntries."Amount to Apply") - Abs(VendorLedgerEntries."Original Pmt. Disc. Possible")) + LineSepLbl +
             FormatAmount(Abs(VendorLedgerEntries."Amount to Apply")) + LineSepLbl +
-            FormatAmount(Abs(VendorLedgerEntries."Original Pmt. Disc. Possible")) + LineSepLbl;
+            FormatAmount(Abs(VendorLedgerEntries."Original Pmt. Disc. Possible"));
         exit(Line);
     end;
 
@@ -239,21 +239,21 @@ codeunit 55100 SAChaseCheckLogic
     var
         TomorrowTxt: Text;
     begin
-        TomorrowTxt := FormatDate(Today() + 1);
+        TomorrowTxt := FormatDate(Today() + 1, '');
         exit(TomorrowTxt)
     end;
 
-    local procedure FormatDate(Date: Date): Text
+    local procedure FormatDate(Date: Date; Separator: Text): Text
     var
         DateText: Text;
     begin
-        DateText := Format(Date, 0, '<Month,2>/<Day,2>/<Year4,4>');
+        DateText := Format(Date, 0, '<Month,2>' + Separator + '<Day,2>' + Separator + '<Year4,4>');
         exit(DateText)
     end;
 
     local procedure FormatAmount(Amount: Decimal): Text
     begin
-        exit(Format(Amount, 0, '<Standard Format,9>'));
+        exit(Format(Amount, 0, '<Precision,2:2><Standard Format,9>'));
     end;
 
     local procedure FormatText(CommentText: Text; MaxLen: Integer): Text
@@ -307,6 +307,18 @@ codeunit 55100 SAChaseCheckLogic
         end;
 
         exit(ResultTxt);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnBeforeInsertGlobalGLEntry', '', false, false)]
+    local procedure OnBeforeInsertGlobalGLEntry(var GlobalGLEntry: Record "G/L Entry"; GenJournalLine: Record "Gen. Journal Line"; GLRegister: Record "G/L Register")
+    var
+        PaymentMethod: Record "Payment Method";
+    begin
+        PaymentMethod.Reset();
+        PaymentMethod.SetFilter(Code, GenJournalLine."Payment Method Code");
+        if PaymentMethod.FindFirst() then
+            if PaymentMethod.SAChaseCheckFormat then
+                GenJournalLine.TestField(SAChaseCheckApplied, true);
     end;
 
     var
